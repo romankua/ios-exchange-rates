@@ -49,13 +49,19 @@ class PrivatBankCurrencyExchangeProvider: CurrencyExchangeRateProviding {
     }
 
     private func map(response: [PrivatBankCurrencyExchangeRate]) -> [CurrencyExchangeRate] {
-        response.map { privatExchangeRate in
-            let baseCurrency = CurrencyCode(rawValue: privatExchangeRate.base_ccy) ?? .other
-            let foreignCurrency = CurrencyCode(rawValue: privatExchangeRate.ccy) ?? .other
+        response.compactMap { privatExchangeRate in
+            guard
+                let baseCurrency = CurrencyCode(rawValue: privatExchangeRate.base_ccy),
+                let foreignCurrency = CurrencyCode(rawValue: privatExchangeRate.ccy),
+                let buying = Double(privatExchangeRate.buy),
+                let selling = Double(privatExchangeRate.sale)
+            else {
+                return nil
+            }
             return CurrencyExchangeRate(baseCurrency: baseCurrency,
                                         foreignCurrency: foreignCurrency,
-                                        buying: Double(privatExchangeRate.buy) ?? 0,
-                                        selling: Double(privatExchangeRate.sale) ?? 0)
+                                        buying: buying,
+                                        selling: selling)
         }
     }
 }

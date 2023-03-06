@@ -44,12 +44,12 @@ struct CurrencyExchangeRate: Identifiable {
     let selling: Double
 }
 
-let testCurrencyExchangeRate = CurrencyExchangeRate(baseCurrency: .uah,
+let mockedCurrencyExchangeRate = CurrencyExchangeRate(baseCurrency: .uah,
                                                     foreignCurrency: .usd,
                                                     buying: 12.3456,
                                                     selling: 12.3456)
 
-let testCurrencyExchangeRates: [CurrencyExchangeRate] = [
+let mockedCurrencyExchangeRates: [CurrencyExchangeRate] = [
     CurrencyExchangeRate(baseCurrency: .uah, foreignCurrency: .usd, buying: 12.3456, selling: 12.3456),
     CurrencyExchangeRate(baseCurrency: .uah, foreignCurrency: .eur, buying: 12.3456, selling: 12.3456)
 ]

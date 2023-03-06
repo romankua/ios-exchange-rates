@@ -10,7 +10,7 @@ import Foundation
 class PrivatBankCurrencyExchangeProvider: CurrencyExchangeRateProviding {
     private let uri = "https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5"
 
-    func fetchRates(completion: @escaping (Result<[CurrencyExchangeRate], CurrencyExchangeRateProvidingError>) -> Void) {
+    func fetchRates(completion: @escaping (Result<[CurrencyExchangeRate], URLLoadingError>) -> Void) {
         guard let serviceUrl = URL(string: uri) else {
             completion(.failure(.invalidUrl(uri)))
             return

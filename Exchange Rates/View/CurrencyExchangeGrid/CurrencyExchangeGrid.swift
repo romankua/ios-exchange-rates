@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CurrencyExchangeGrid: View {
-    @Binding var items: [CurrencyExchangeRate]
+    var items: [CurrencyExchangeRate]
 
     private let columns = [
         GridItem(alignment: .leading),
@@ -21,7 +21,7 @@ struct CurrencyExchangeGrid: View {
             LazyVGrid(columns: columns, spacing: 20) {
                 CurrencyExchangeGridHeader()
 
-                ForEach($items) { item in
+                ForEach(items) { item in
                     CurrencyExchangeGridRow(item: item)
                 }
             }
@@ -31,6 +31,6 @@ struct CurrencyExchangeGrid: View {
 
 struct CurrencyExchangeGrid_Previews: PreviewProvider {
     static var previews: some View {
-        CurrencyExchangeGrid(items: .constant(testCurrencyExchangeRates))
+        CurrencyExchangeGrid(items: mockedCurrencyExchangeRates)
     }
 }

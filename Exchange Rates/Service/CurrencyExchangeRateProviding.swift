@@ -7,12 +7,6 @@
 
 import Foundation
 
-enum CurrencyExchangeRateProvidingError: Error {
-    case invalidUrl(String)
-    case invalidResponse(URL)
-    case forwarded(Error)
-}
-
 protocol CurrencyExchangeRateProviding {
-    func fetchRates(completion: @escaping (Result<[CurrencyExchangeRate], CurrencyExchangeRateProvidingError>) -> Void)
+    func fetchRates(completion: @escaping (Result<[CurrencyExchangeRate], URLLoadingError>) -> Void)
 }

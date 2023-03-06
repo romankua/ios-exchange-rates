@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CurrencyExchangeGridRow: View {
-    @Binding var item: CurrencyExchangeRate
+    var item: CurrencyExchangeRate
 
     var body: some View {
         HStack {
@@ -23,14 +23,14 @@ struct CurrencyExchangeGridRow: View {
             }
         }
 
-        Text(item.buying.formatted())
+        Text(String(format: "%.2f", item.buying))
 
-        Text(item.selling.formatted())
+        Text(String(format: "%.2f", item.selling))
     }
 }
 
 struct CurrencyExchangeGridRow_Previews: PreviewProvider {
     static var previews: some View {
-        CurrencyExchangeGridRow(item: .constant(testCurrencyExchangeRate))
+        CurrencyExchangeGridRow(item: mockedCurrencyExchangeRate)
     }
 }

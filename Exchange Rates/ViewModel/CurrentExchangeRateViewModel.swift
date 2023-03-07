@@ -7,9 +7,7 @@
 
 import Foundation
 
-protocol CurrentExchangeRateViewModelable: LoadableObject {
-    var state: LoadingState<[CurrencyExchangeRate]> { get }
-}
+protocol CurrentExchangeRateViewModelable: LoadableObject where ValueType == [CurrencyExchangeRate] {}
 
 class CurrentExchangeRateViewModel: CurrentExchangeRateViewModelable {
     @Published var state: LoadingState<[CurrencyExchangeRate]> = .initial
@@ -37,7 +35,7 @@ class CurrentExchangeRateViewModel: CurrentExchangeRateViewModelable {
 class MockedCurrentExchangeRateViewModel: CurrentExchangeRateViewModelable {
     @Published var state: LoadingState<[CurrencyExchangeRate]>
 
-    init(state: LoadingState<[CurrencyExchangeRate]>) {
+    init(state: LoadingState<[CurrencyExchangeRate]> = .initial) {
         self.state = state
     }
     

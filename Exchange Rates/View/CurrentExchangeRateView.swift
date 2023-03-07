@@ -12,34 +12,26 @@ struct CurrentExchangeRateView<ViewModel: CurrentExchangeRateViewModelable>: Vie
 
     var body: some View {
         VStack {
-            switch viewModel.state {
-            case .initial:
-                Color.clear.onAppear(perform: load)
-            case .loading:
-                ProgressView()
-            case let .loaded(rates):
+            LoadableObjectView(viewModel: viewModel) { rates in
                 CurrencyExchangeGrid(items: rates)
-            case let .failed(error):
+            } errorContent: { error in
                 ErrorView(title: "Oops, error happened!",
                           message: error.localizedDescription,
-                          retryHandler: load)
+                          onRetry: viewModel.load)
             }
         }
         .padding()
-        .refreshable { load() }
+        .refreshable { viewModel.load() }
     }
 
     init(viewModel: ViewModel = CurrentExchangeRateViewModel()) {
         self.viewModel = viewModel
     }
-
-    private func load() {
-        viewModel.load()
-    }
 }
 
 struct CurrentExchangeRateView_Previews: PreviewProvider {
     static var previews: some View {
-        CurrentExchangeRateView(viewModel: MockedCurrentExchangeRateViewModel(state: .failed(URLLoadingError.invalidUrl("abc"))))
+        CurrentExchangeRateView(viewModel: MockedCurrentExchangeRateViewModel())
+//        CurrentExchangeRateView(viewModel: MockedCurrentExchangeRateViewModel(state: .failed(URLLoadingError.invalidUrl("abc"))))
     }
 }

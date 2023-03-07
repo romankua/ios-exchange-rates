@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		051DDCA029B6BF72008EA644 /* HistoryExchangeRateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051DDC9F29B6BF72008EA644 /* HistoryExchangeRateViewModel.swift */; };
 		0555162329B01EC300984B27 /* CurrencyExchangeGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0555162229B01EC300984B27 /* CurrencyExchangeGrid.swift */; };
 		0555162529B0FBD700984B27 /* CurrencyExchangeGridHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0555162429B0FBD700984B27 /* CurrencyExchangeGridHeader.swift */; };
 		0555162729B0FC4500984B27 /* CurrencyExchangeGridRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0555162629B0FC4500984B27 /* CurrencyExchangeGridRow.swift */; };
@@ -48,6 +49,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		051DDC9F29B6BF72008EA644 /* HistoryExchangeRateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryExchangeRateViewModel.swift; sourceTree = "<group>"; };
 		0555162229B01EC300984B27 /* CurrencyExchangeGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyExchangeGrid.swift; sourceTree = "<group>"; };
 		0555162429B0FBD700984B27 /* CurrencyExchangeGridHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyExchangeGridHeader.swift; sourceTree = "<group>"; };
 		0555162629B0FC4500984B27 /* CurrencyExchangeGridRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyExchangeGridRow.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				0555162929B10F1300984B27 /* CurrentExchangeRateViewModel.swift */,
+				051DDC9F29B6BF72008EA644 /* HistoryExchangeRateViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -358,6 +361,7 @@
 				0555162729B0FC4500984B27 /* CurrencyExchangeGridRow.swift in Sources */,
 				05A26E3129AFA5C400530C14 /* HistoryExchangeRateView.swift in Sources */,
 				05A26E2E29AF9B2200530C14 /* CurrencyExchangeRate.swift in Sources */,
+				051DDCA029B6BF72008EA644 /* HistoryExchangeRateViewModel.swift in Sources */,
 				0563485829AF42D900044C2B /* CurrentExchangeRateView.swift in Sources */,
 				05AF5D5B29B568F400E6CB92 /* ErrorView.swift in Sources */,
 				0563485629AF42D900044C2B /* Exchange_RatesApp.swift in Sources */,

@@ -7,15 +7,17 @@
 
 import Foundation
 
-protocol HistoryExchangeRateViewModelable: LoadableObject where ValueType == [CurrencyExchangeRate] {
-    var date: Date { get set }
-}
+protocol HistoryExchangeRateViewModelable: LoadableObject where ValueType == [CurrencyExchangeRate] {}
 
 class HistoryExchangeRateViewModel: HistoryExchangeRateViewModelable {
     @Published var state: LoadingState<[CurrencyExchangeRate]> = .initial
-    var date: Date = Date()
+    let date: Date
 
     private let privatBankCurrencyExchangeProvider = PrivatBankCurrencyExchangeProvider()
+
+    init(date: Date) {
+        self.date = date
+    }
 
     func load() {
         state = .loading
@@ -37,7 +39,6 @@ class HistoryExchangeRateViewModel: HistoryExchangeRateViewModelable {
 
 class MockedHistoryExchangeRateViewModel: HistoryExchangeRateViewModelable {
     @Published var state: LoadingState<[CurrencyExchangeRate]>
-    var date: Date = Date()
 
     init(state: LoadingState<[CurrencyExchangeRate]> = .initial) {
         self.state = state

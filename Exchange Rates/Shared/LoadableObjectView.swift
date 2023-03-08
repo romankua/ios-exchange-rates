@@ -11,11 +11,11 @@ struct LoadableObjectView<ViewModel: LoadableObject, Content: View, ErrorContent
     @ObservedObject var viewModel: ViewModel
     var content: (ViewModel.ValueType) -> Content
     var errorContent: (Error) -> ErrorContent
-    
+
     var body: some View {
         switch viewModel.state {
         case .initial:
-            Color.clear.onAppear(perform: load)
+            Color.clear.onAppear(perform: viewModel.load)
         case .loading:
             ProgressView()
         case let .loaded(value):
@@ -31,9 +31,5 @@ struct LoadableObjectView<ViewModel: LoadableObject, Content: View, ErrorContent
         self.viewModel = viewModel
         self.content = content
         self.errorContent = errorContent
-    }
-
-    private func load() {
-        viewModel.load()
     }
 }

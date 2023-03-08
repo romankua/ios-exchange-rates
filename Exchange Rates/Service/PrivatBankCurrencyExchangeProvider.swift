@@ -10,8 +10,6 @@ import Foundation
 class PrivatBankCurrencyExchangeProvider: CurrencyExchangeRateProviding {
     private lazy var dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
-//        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
-//        dateFormatter.setLocalizedDateFormatFromTemplate("dd.MM.yyyy")
         dateFormatter.dateFormat = "dd.MM.yyyy"
         return dateFormatter
     }()

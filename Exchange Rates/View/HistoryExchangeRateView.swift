@@ -9,12 +9,9 @@ import SwiftUI
 
 struct HistoryExchangeRateView<ViewModel: HistoryExchangeRateViewModelable>: View {
     @ObservedObject var viewModel: ViewModel
-    @State private var date: Date = Date()
 
     var body: some View {
         VStack {
-            DatePicker("Choose date", selection: $date, displayedComponents: .date)
-
             LoadableObjectView(viewModel: viewModel) { rates in
                 CurrencyExchangeGrid(items: rates)
             } errorContent: { error in
@@ -25,13 +22,9 @@ struct HistoryExchangeRateView<ViewModel: HistoryExchangeRateViewModelable>: Vie
         }
         .padding()
         .refreshable { viewModel.load() }
-        .onChange(of: date) { newValue in
-            viewModel.date = date
-            viewModel.load()
-        }
     }
 
-    init(viewModel: ViewModel = HistoryExchangeRateViewModel()) {
+    init(viewModel: ViewModel) {
         self.viewModel = viewModel
     }
 }

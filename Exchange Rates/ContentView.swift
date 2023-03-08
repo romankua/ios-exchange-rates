@@ -14,7 +14,7 @@ struct ContentView: View {
                 .tabItem {
                     TabItemCurrent()
                 }
-            HistoryExchangeRateView()
+            HistoryExchangeRateWrapperView()
                 .tabItem {
                     TabItemHistory()
                 }

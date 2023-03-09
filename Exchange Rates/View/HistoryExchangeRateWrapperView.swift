@@ -8,15 +8,34 @@
 import SwiftUI
 
 struct HistoryExchangeRateWrapperView: View {
-    @State private var date: Date = Calendar.current.date(byAdding: .day, value: -1, to: Date()) ?? Date()
+    @State private var date: Date = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
+    @State private var dateSelected: Bool = false
+
+    private let dateRange: ClosedRange<Date> = {
+        let calendar = Calendar.current
+        let startDate = calendar.date(byAdding: .year, value: -5, to: Date())!
+        let endDate = calendar.date(byAdding: .day, value: -1, to: Date())!
+        return startDate...endDate
+    }()
     
     var body: some View {
         VStack {
-            DatePicker("Choose date", selection: $date, displayedComponents: .date)
+            DatePicker("Choose date",
+                       selection: $date,
+                       in: dateRange,
+                       displayedComponents: [.date])
+                .datePickerStyle(.graphical)
 
-            HistoryExchangeRateView(viewModel: HistoryExchangeRateViewModel(date: date))
+            if dateSelected {
+                HistoryExchangeRateView(viewModel: HistoryExchangeRateViewModel(date: date))
+            }
+
+            Spacer()
         }
         .padding()
+        .onChange(of: date) { _ in
+            dateSelected = true
+        }
     }
 }
 

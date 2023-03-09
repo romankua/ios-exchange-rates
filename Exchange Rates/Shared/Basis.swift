@@ -28,10 +28,3 @@ protocol LoadableObject: StatefulObject {
     var state: LoadingState<ValueType> { get }
     func load()
 }
-
-/// Describes URL loading error
-enum URLLoadingError: Error {
-    case invalidUrl(String)
-    case invalidResponse(URL)
-    case forwarded(Error)
-}

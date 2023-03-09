@@ -15,6 +15,7 @@
 		0555162A29B10F1300984B27 /* CurrentExchangeRateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0555162929B10F1300984B27 /* CurrentExchangeRateViewModel.swift */; };
 		0555162D29B24A6900984B27 /* CurrencyExchangeRateProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0555162C29B24A6900984B27 /* CurrencyExchangeRateProviding.swift */; };
 		0555162F29B2552400984B27 /* PrivatBankCurrencyExchangeProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0555162E29B2552400984B27 /* PrivatBankCurrencyExchangeProvider.swift */; };
+		0559F3C029BA09F5009AEDFB /* HTTPRequestMaking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0559F3BF29BA09F5009AEDFB /* HTTPRequestMaking.swift */; };
 		0563485629AF42D900044C2B /* Exchange_RatesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0563485529AF42D900044C2B /* Exchange_RatesApp.swift */; };
 		0563485829AF42D900044C2B /* CurrentExchangeRateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0563485729AF42D900044C2B /* CurrentExchangeRateView.swift */; };
 		0563485A29AF42DD00044C2B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0563485929AF42DD00044C2B /* Assets.xcassets */; };
@@ -58,6 +59,7 @@
 		0555162929B10F1300984B27 /* CurrentExchangeRateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentExchangeRateViewModel.swift; sourceTree = "<group>"; };
 		0555162C29B24A6900984B27 /* CurrencyExchangeRateProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyExchangeRateProviding.swift; sourceTree = "<group>"; };
 		0555162E29B2552400984B27 /* PrivatBankCurrencyExchangeProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivatBankCurrencyExchangeProvider.swift; sourceTree = "<group>"; };
+		0559F3BF29BA09F5009AEDFB /* HTTPRequestMaking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPRequestMaking.swift; sourceTree = "<group>"; };
 		0563485229AF42D900044C2B /* Exchange Rates.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Exchange Rates.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0563485529AF42D900044C2B /* Exchange_RatesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exchange_RatesApp.swift; sourceTree = "<group>"; };
 		0563485729AF42D900044C2B /* CurrentExchangeRateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentExchangeRateView.swift; sourceTree = "<group>"; };
@@ -227,6 +229,7 @@
 				05AF5D5829B5528700E6CB92 /* Basis.swift */,
 				05AF5D5C29B6A71300E6CB92 /* LoadableObjectView.swift */,
 				05AF5D5A29B568F400E6CB92 /* ErrorView.swift */,
+				0559F3BF29BA09F5009AEDFB /* HTTPRequestMaking.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -368,6 +371,7 @@
 				051DDCA029B6BF72008EA644 /* HistoryExchangeRateViewModel.swift in Sources */,
 				0563485829AF42D900044C2B /* CurrentExchangeRateView.swift in Sources */,
 				05AF5D5B29B568F400E6CB92 /* ErrorView.swift in Sources */,
+				0559F3C029BA09F5009AEDFB /* HTTPRequestMaking.swift in Sources */,
 				0563485629AF42D900044C2B /* Exchange_RatesApp.swift in Sources */,
 				0555162F29B2552400984B27 /* PrivatBankCurrencyExchangeProvider.swift in Sources */,
 				0555162D29B24A6900984B27 /* CurrencyExchangeRateProviding.swift in Sources */,

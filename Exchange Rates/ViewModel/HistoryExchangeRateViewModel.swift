@@ -13,15 +13,16 @@ class HistoryExchangeRateViewModel: HistoryExchangeRateViewModelable {
     @Published var state: LoadingState<[CurrencyExchangeRate]> = .initial
     let date: Date
 
-    private let privatBankCurrencyExchangeProvider = PrivatBankCurrencyExchangeProvider()
+    private let currencyExchangeRateProvider: CurrencyExchangeRateForDateProviding
 
-    init(date: Date) {
+    init(date: Date, currencyExchangeRateProvider: CurrencyExchangeRateForDateProviding = PrivatBankCurrencyExchangeProvider()) {
         self.date = date
+        self.currencyExchangeRateProvider = currencyExchangeRateProvider
     }
 
     func load() {
         state = .loading
-        privatBankCurrencyExchangeProvider.fetchRates(for: date) { [weak self] result in
+        currencyExchangeRateProvider.fetchRates(for: date) { [weak self] result in
             switch result {
             case let .success(currencyExchangeRate):
                 DispatchQueue.main.async {

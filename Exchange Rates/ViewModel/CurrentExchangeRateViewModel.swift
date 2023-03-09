@@ -12,11 +12,15 @@ protocol CurrentExchangeRateViewModelable: LoadableObject where ValueType == [Cu
 class CurrentExchangeRateViewModel: CurrentExchangeRateViewModelable {
     @Published var state: LoadingState<[CurrencyExchangeRate]> = .initial
 
-    private let privatBankCurrencyExchangeProvider = PrivatBankCurrencyExchangeProvider()
+    private let currencyExchangeRateProvider: CurrencyExchangeRateProviding
+
+    init(currencyExchangeRateProvider: CurrencyExchangeRateProviding = PrivatBankCurrencyExchangeProvider()) {
+        self.currencyExchangeRateProvider = currencyExchangeRateProvider
+    }
 
     func load() {
         state = .loading
-        privatBankCurrencyExchangeProvider.fetchRates { [weak self] result in
+        currencyExchangeRateProvider.fetchRates { [weak self] result in
             switch result {
             case let .success(currencyExchangeRate):
                 DispatchQueue.main.async {

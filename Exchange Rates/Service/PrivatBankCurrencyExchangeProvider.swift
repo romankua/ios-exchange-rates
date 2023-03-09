@@ -7,54 +7,39 @@
 
 import Foundation
 
-class PrivatBankCurrencyExchangeProvider: CurrencyExchangeRateProviding {
+class PrivatBankCurrencyExchangeProvider: CurrencyExchangeRateProviding, CurrencyExchangeRateForDateProviding {
+    private let httpRequestMaker: HTTPRequestMaking
+
     private lazy var dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd.MM.yyyy"
         return dateFormatter
     }()
 
-    func fetchRates(completion: @escaping (Result<[CurrencyExchangeRate], URLLoadingError>) -> Void) {
+    init(httpRequestMaker: HTTPRequestMaking = HTTPRequestMaker()) {
+        self.httpRequestMaker = httpRequestMaker
+    }
+
+    func fetchRates(completion: @escaping (Result<[CurrencyExchangeRate], CurrencyExchangeRateError>) -> Void) {
         let uri = "https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5"
-        
+
         guard let serviceUrl = URL(string: uri) else {
             completion(.failure(.invalidUrl(uri)))
             return
         }
 
-        let dataTask = URLSession.shared.dataTask(with: serviceUrl) { data, response, error in
-            if let error = error {
-                completion(.failure(.forwarded(error)))
-                return
-            }
-
-            guard
-                let response = response as? HTTPURLResponse,
-                response.statusCode == 200
-            else {
-                completion(.failure(.invalidResponse(serviceUrl)))
-                return
-            }
-
-            guard let responseData = data else {
-                completion(.failure(.invalidResponse(serviceUrl)))
-                return
-            }
-
-            let decoder = JSONDecoder()
-            do {
-                let exchangeResponse = try decoder.decode([PrivatBankCurrentCurrencyExchangeRate].self, from: responseData)
-                let exchangeRates = self.map(response: exchangeResponse)
+        httpRequestMaker.send(url: serviceUrl) { (result: Result<[PrivatBankCurrentCurrencyExchangeRate], HTTPRequestError>) in
+            switch result {
+            case let .success(exchangeRatesResponse):
+                let exchangeRates = self.map(response: exchangeRatesResponse)
                 completion(.success(exchangeRates))
-            } catch let error {
-                completion(.failure(.forwarded(error)))
+            case let .failure(error):
+                completion(.failure(.invalidResponse(error)))
             }
         }
-
-        dataTask.resume()
     }
 
-    func fetchRates(for date: Date, completion: @escaping (Result<[CurrencyExchangeRate], URLLoadingError>) -> Void) {
+    func fetchRates(for date: Date, completion: @escaping (Result<[CurrencyExchangeRate], CurrencyExchangeRateError>) -> Void) {
         let uri = "https://api.privatbank.ua/p24api/exchange_rates?json"
         let dateParam = URLQueryItem(name: "date", value: dateFormatter.string(from: date))
 
@@ -63,37 +48,16 @@ class PrivatBankCurrencyExchangeProvider: CurrencyExchangeRateProviding {
             return
         }
 
-        let dataTask = URLSession.shared.dataTask(with: serviceUrl) { data, response, error in
-            if let error = error {
-                completion(.failure(.forwarded(error)))
-                return
-            }
-
-            guard
-                let response = response as? HTTPURLResponse,
-                response.statusCode == 200
-            else {
-                completion(.failure(.invalidResponse(serviceUrl)))
-                return
-            }
-
-            guard let responseData = data else {
-                completion(.failure(.invalidResponse(serviceUrl)))
-                return
-            }
-
-            let decoder = JSONDecoder()
-            do {
-                let exchangeResponseContainer = try decoder.decode(PrivatBankCurrentHistoryExchangeRateResponse.self, from: responseData)
-                let exchangeResponse = exchangeResponseContainer.exchangeRate
+        httpRequestMaker.send(url: serviceUrl) { (result: Result<PrivatBankCurrentHistoryExchangeRateResponse, HTTPRequestError>) in
+            switch result {
+            case let .success(exchangeRatesResponse):
+                let exchangeResponse = exchangeRatesResponse.exchangeRate
                 let exchangeRates = self.map(response: exchangeResponse)
                 completion(.success(exchangeRates))
-            } catch let error {
-                completion(.failure(.forwarded(error)))
+            case let .failure(error):
+                completion(.failure(.invalidResponse(error)))
             }
         }
-
-        dataTask.resume()
     }
 
     private func map(response: [PrivatBankCurrentCurrencyExchangeRate]) -> [CurrencyExchangeRate] {
